@@ -1,5 +1,5 @@
 import { MedicationService } from '../../services/medication.service';
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { Medication } from '../../models/medication.model';
 import { FormsModule } from '@angular/forms';
 

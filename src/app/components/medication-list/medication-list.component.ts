@@ -4,7 +4,6 @@ import {
   ChangeDetectorRef,
   Component,
   OnInit,
-  signal,
 } from '@angular/core';
 import { switchMap } from 'rxjs';
 import { Medication } from '../../models/medication.model';
@@ -51,7 +50,7 @@ export class MedicationListComponent implements OnInit {
   ) {
     const isChecked = (event.target as HTMLInputElement).checked;
     const medicationDays = this.medications.find((med) =>
-      med.find(({ name, id }) => name === medicationName),
+      med.find(({ name }) => name === medicationName),
     );
     const medication = medicationDays && medicationDays[day];
     const updatedMedication = {
