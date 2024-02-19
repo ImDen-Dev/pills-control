@@ -1,5 +1,5 @@
 export const environment = {
-  production: false,
+  production: true,
   apiUrl: 'pillsControl',
   firebaseConfig: {
     apiKey: 'AIzaSyA5JqtL4NwMUFpyqPPnLEdjOy846Ww74hU',
