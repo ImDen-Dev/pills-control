@@ -1,0 +1,9 @@
+<div>
+  <select class="form-select" (change)="onChangeMonth($event)">
+    @for (month of months; track month; let i = $index) {
+    <option [selected]="i === currentMonth" [value]="month">
+      {{ month }}
+    </option>
+    }
+  </select>
+</div>
