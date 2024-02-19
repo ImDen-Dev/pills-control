@@ -1,5 +1,5 @@
 <div class="table-responsive">
-  @if (medications.length && medications[0].length) {
+  @if (medications?.length) {
   <table class="table table-bordered table-striped align-middle">
     <thead class="table-light text-center">
       <tr>
@@ -23,8 +23,8 @@
     <tbody>
       @for (medication of medications; track medication) {
       <tr>
-        @for(medicationItem of medication; track medicationItem; let first =
-        $first; let i = $index) { @if (first) {
+        @for(medicationItem of getMedications(medication); track
+        medicationItem.name; let first = $first; let i = $index) { @if (first) {
         <th scope="row">{{ medicationItem.name }}</th>
         }
         <td>

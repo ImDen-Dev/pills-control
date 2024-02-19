@@ -18,8 +18,8 @@ import { MedicationAddComponent } from '../medication-add/medication-add.compone
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MedicationListComponent implements OnInit {
-  medications!: Medication[][];
-  daysCount!: number[];
+  medications: Medication[][] | undefined;
+  daysCount: number[] | undefined;
 
   constructor(
     private medicationService: MedicationService,
@@ -49,7 +49,7 @@ export class MedicationListComponent implements OnInit {
     day: number,
   ) {
     const isChecked = (event.target as HTMLInputElement).checked;
-    const medicationDays = this.medications.find((med) =>
+    const medicationDays = this.medications?.find((med) =>
       med.find(({ name }) => name === medicationName),
     );
     const medication = medicationDays && medicationDays[day];
@@ -59,5 +59,9 @@ export class MedicationListComponent implements OnInit {
     } as Medication;
     console.log(updatedMedication);
     this.medicationService.updateMedication(day, updatedMedication);
+  }
+
+  getMedications(medication: Medication[]): Medication[] {
+    return [...Array.from(medication)];
   }
 }

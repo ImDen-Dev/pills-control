@@ -2,7 +2,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { Medication } from '../models/medication.model';
-import moment from 'moment/moment';
+import moment from 'moment';
 import 'moment/locale/uk';
 import { environment } from '../../environments/environment';
 
