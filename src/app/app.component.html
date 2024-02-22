@@ -1,10 +1,42 @@
 <div class="navbar navbar-expand-lg bg-body-tertiary mb-4 py-2 shadow-sm">
   <div class="container-fluid">
-    <app-month-picker></app-month-picker>
-    <app-medication-add></app-medication-add>
+    <button
+      class="navbar-toggler"
+      type="button"
+      (click)="isShowNav = !isShowNav"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div
+      class="collapse navbar-collapse  {{ isShowNav ? 'show' : '' }}"
+      id="navbarSupportedContent"
+    >
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item px-lg-2 py-2">
+          <app-month-picker></app-month-picker>
+        </li>
+        <li class="nav-item px-lg-2 py-2">
+          <app-medication-add></app-medication-add>
+        </li>
+        <li class="nav-item px-lg-2 py-2 align-self-center">
+          <div class="form-check form-switch">
+            <label class="form-check-label" for="flexSwitchCheckChecked"
+              >Таблиця</label
+            >
+            <input
+              class="form-check-input"
+              type="checkbox"
+              role="switch"
+              id="flexSwitchCheckChecked"
+              (change)="showTableMod($event)"
+            />
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
 
 <div class="container-fluid">
-  <app-medication-list></app-medication-list>
+  <app-medication-list [tableMod]="isShowTable"></app-medication-list>
 </div>

@@ -18,4 +18,10 @@ import { MedicationAddComponent } from './components/medication-add/medication-a
 })
 export class AppComponent {
   title = 'pills-control-app';
+  isShowNav = false;
+  isShowTable = false;
+
+  showTableMod(event: Event): void {
+    this.isShowTable = (event.target as HTMLInputElement).checked;
+  }
 }

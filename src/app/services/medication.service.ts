@@ -74,6 +74,10 @@ export class MedicationService {
     this.month$.next(monthNumber);
   }
 
+  getTodaysDate(): number {
+    return moment().date();
+  }
+
   getSelectedMonth(): number {
     return this.selectedMonth;
   }

@@ -3,23 +3,32 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  Input,
   OnInit,
 } from '@angular/core';
 import { switchMap } from 'rxjs';
 import { Medication } from '../../models/medication.model';
-import { AsyncPipe, JsonPipe } from '@angular/common';
 import { MedicationAddComponent } from '../medication-add/medication-add.component';
+import { MedicationTableComponent } from '../medication-table/medication-table.component';
+import { MedicationByDateComponent } from '../medication-by-date/medication-by-date.component';
 
 @Component({
   selector: 'app-medication-list',
   templateUrl: 'medication-list.component.html',
   standalone: true,
-  imports: [AsyncPipe, JsonPipe, MedicationAddComponent],
+  imports: [
+    MedicationAddComponent,
+    MedicationTableComponent,
+    MedicationByDateComponent,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MedicationListComponent implements OnInit {
-  medications: Medication[][] | undefined;
+  medicationsAll: Medication[][] | undefined;
   daysCount: number[] | undefined;
+
+  @Input()
+  tableMod = false;
 
   constructor(
     private medicationService: MedicationService,
@@ -36,32 +45,9 @@ export class MedicationListComponent implements OnInit {
       .subscribe({
         next: (value) => {
           this.daysCount = Array.from({ length: value[0]?.length });
-          this.medications = value;
+          this.medicationsAll = value;
           this.cdr.detectChanges();
         },
       });
-  }
-
-  onChange(
-    event: Event,
-    medicationName: string,
-    time: 'morning' | 'afternoon' | 'evening',
-    day: number,
-  ) {
-    const isChecked = (event.target as HTMLInputElement).checked;
-    const medicationDays = this.medications?.find((med) =>
-      med.find(({ name }) => name === medicationName),
-    );
-    const medication = medicationDays && medicationDays[day];
-    const updatedMedication = {
-      ...medication,
-      [time]: isChecked,
-    } as Medication;
-    console.log(updatedMedication);
-    this.medicationService.updateMedication(day, updatedMedication);
-  }
-
-  getMedications(medication: Medication[]): Medication[] {
-    return [...Array.from(medication)];
   }
 }

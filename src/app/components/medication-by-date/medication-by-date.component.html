@@ -1,0 +1,63 @@
+<table
+  class="table table-responsive table-bordered table-striped align-middle table-by-date"
+>
+  <thead class="table-light text-center">
+    <tr>
+      <th scope="col">Назва/Число</th>
+      <th scope="col" colspan="3">
+        <select class="form-select" [formControl]="selectDate">
+          @for(days of daysCount; track days; let i = $index){
+          <option [selected]="+todayDay === i + 1" [value]="i + 1">
+            {{ i + 1 }}
+          </option>
+          }
+        </select>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (medication of checkMedicationsBySelectedDate() | async; track
+    medication) {
+
+    <tr>
+      <th scope="row">{{ medication.name }}</th>
+      <td>
+        <div class="form-check d-flex justify-content-center">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            [checked]="medication.morning"
+            (change)="
+              onChange($event, medication.id, 'morning', selectDate.value)
+            "
+          />
+        </div>
+      </td>
+      <td>
+        <div class="form-check d-flex justify-content-center">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            [checked]="medication.afternoon"
+            (change)="
+              onChange($event, medication.id, 'afternoon', selectDate.value)
+            "
+          />
+        </div>
+      </td>
+      <td>
+        <div class="form-check d-flex justify-content-center">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            [checked]="medication.evening"
+            (change)="
+              onChange($event, medication.id, 'evening', selectDate.value)
+            "
+          />
+        </div>
+      </td>
+    </tr>
+    }
+  </tbody>
+</table>
