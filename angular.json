@@ -70,12 +70,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "pills-control-app:build:production",
-              "browserTarget": "pills-control-app:build:production"
+              "buildTarget": "pills-control-app:build:production"
             },
             "development": {
-              "buildTarget": "pills-control-app:build:development",
-              "browserTarget": "pills-control-app:build:development"
+              "buildTarget": "pills-control-app:build:development"
             }
           },
           "defaultConfiguration": "development"

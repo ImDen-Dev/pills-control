@@ -1,72 +1,17 @@
 <div class="table-responsive">
-  @if (medications?.length) {
-  <table class="table table-bordered table-striped align-middle">
-    <thead class="table-light text-center">
-      <tr>
-        @for(days of daysCount; track days; let first = $first; let i = $index){
-        @if (first){
-        <th scope="col">Дні</th>
-        }
-        <th scope="col" colspan="3">{{ i + 1 }}</th>
-        }
-      </tr>
-      <tr>
-        @for(days of daysCount; track days; let first = $first){ @if (first){
-        <th scope="col">Назва/Час</th>
-        }
-        <th scope="col">Ранок</th>
-        <th scope="col">Обід</th>
-        <th scope="col">Вечір</th>
-        }
-      </tr>
-    </thead>
-    <tbody>
-      @for (medication of medications; track medication) {
-      <tr>
-        @for(medicationItem of getMedications(medication); track
-        medicationItem.name; let first = $first; let i = $index) { @if (first) {
-        <th scope="row">{{ medicationItem.name }}</th>
-        }
-        <td>
-          <div class="form-check d-flex justify-content-center">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              [checked]="medicationItem.morning"
-              (change)="onChange($event, medicationItem.name, 'morning', i)"
-            />
-          </div>
-        </td>
-        <td>
-          <div class="form-check d-flex justify-content-center">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              [checked]="medicationItem.afternoon"
-              (change)="onChange($event, medicationItem.name, 'afternoon', i)"
-            />
-          </div>
-        </td>
-        <td>
-          <div class="form-check d-flex justify-content-center">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              [checked]="medicationItem.evening"
-              (change)="onChange($event, medicationItem.name, 'evening', i)"
-            />
-          </div>
-        </td>
-        }
-      </tr>
-      }
-    </tbody>
-  </table>
-  } @else {
+  @if (medicationsAll?.length) { @if(tableMod) {
+  <app-medication-table
+    [daysCount]="daysCount"
+    [medications]="medicationsAll"
+  ></app-medication-table>
+  } @else {<app-medication-by-date
+    [daysCount]="daysCount"
+    [medications]="medicationsAll"
+  ></app-medication-by-date
+  >} } @else {
   <div class="container-fluid pb-1">
     <p class="text-center">Додайте ліки.</p>
     <app-medication-add></app-medication-add>
   </div>
-
   }
 </div>
